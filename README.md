@@ -36,7 +36,7 @@ docker-compose.yaml
 
 1. Copie o arquivo `.env.example` para `.env` e configure as variáveis:
 ```env
-SECRET_KEY=django-insecure-...
+SECRET_KEY="django-insecure-7v8g&*o1gl3w+4c9b9x$v(j9=$d$1s%sl7m#m4!@+j)"
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
 
@@ -106,3 +106,33 @@ docker-compose exec task_api python manage.py test tasks
 
 Documentação automática da API em `/swagger/`, gerada pelo drf-yasg.
 
+## Deployment na AWS Elastic Beanstalk
+
+- Conta na AWS
+- AWS CLI instalada e configurada (`aws configure`)
+- Elastic Beanstalk CLI instalada (`eb cli`)
+
+1. Instale o EB CLI:
+```bash
+pip3 install awsebcli
+```
+
+2. Inicialize seu projeto para o Elastic Beanstalk::
+```bash
+pip3 install awsebcli
+```
+
+3. Criar ambiente para a aplicação::
+```bash
+eb create nome-do-ambiente
+```
+3. Configurar env::
+```bash
+eb setenv SECRET_KEY=seu_secret_key DB_NAME=taskdb DB_USER=postgres DB_PASSWORD=senha DB_HOST=host_db DB_PORT=5432 DEBUG=False
+```
+
+4. Fazer o deploy::
+```bash
+eb deploy
+```
+5. Depois do deploy o terminal vai fornecer a url para fazer as requisições
